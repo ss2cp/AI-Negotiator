@@ -38,7 +38,7 @@ class ss2cp(BaseNegotiator):
     def oppoEstimation(self, offer):
         # type: (object) -> object
         global oppo_dict
-        if self.offer is not None:
+        if offer is not None:
             for item in offer:
                 if oppo_dict is None:
                     oppo_dict = {
