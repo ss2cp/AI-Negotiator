@@ -1,5 +1,6 @@
 from negotiator_base import BaseNegotiator
 from random import random
+from functools import wraps
 
 
 # Example negotiator implementation, which randomly chooses to accept
@@ -10,13 +11,16 @@ from random import random
 class Negotiator(BaseNegotiator):
     # Override the make_offer method from BaseNegotiator to accept a given offer 20%
     # of the time, and return a random subset the rest of the time.
+
     def make_offer(self, offer):
         self.offer = offer
+
+
         if random() < 0.1 and offer is not None:
             # Very important - we save the offer we're going to return as self.offer
             print "[RN]Random Negotiator agree that you can take " + str(self.offer)
             self.offer = BaseNegotiator.set_diff(self)
-            print "[RN]Negotiator will take: " + str(self.offer)
+            print "[RN]Random Negotiator will take: " + str(self.offer)
             return self.offer
         else:
             ordering = self.preferences
