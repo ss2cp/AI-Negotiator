@@ -13,6 +13,9 @@ class ss2cp(BaseNegotiator):
     # Override the make_offer method from BaseNegotiator to accept a given offer 20%
     # of the time, and return a random subset the rest of the time.
 
+
+
+
     # a getter method to get the maxTurns
     def getTurns(self):
         return self.iter_limit
@@ -30,9 +33,29 @@ class ss2cp(BaseNegotiator):
     # initialize a global variable to store the maxTurns
     maxTurns = 0
 
+    oppo_dict = {}
+
+    def oppoEstimation(self, offer):
+        # type: (object) -> object
+        global oppo_dict
+        if self.offer is not None:
+            for item in offer:
+                if oppo_dict is None:
+                    oppo_dict = {
+                        item: 1
+                    }
+                else:
+                    if item not in oppo_dict:
+                        oppo_dict[item] = 1
+                        return oppo_dict
+                    else:
+                        oppo_dict[item] += oppo_dict[item]
+                        return oppo_dict
+
     @counter
     def make_offer(self, offer):
         global maxTurns
+        global oppo_dict
         # print the number of current turn
         print self.make_offer.count
         # get the current turn
@@ -65,10 +88,6 @@ class ss2cp(BaseNegotiator):
                         break
                 self.offer = ourOffer
 
-                maxTurns = ss2cp.getTurns(self)
-                print "[SS}ss2cp starts second, incrementing the max turn by 1, max turns is " + str(maxTurns)
-                # then there will be no extra chance to accept an offer in the end
-
                 print "[SS]ss2cp will take: " + str(ourOffer) + ". My utility will be " + str(self.utility())
 
                 return self.offer
@@ -81,9 +100,12 @@ class ss2cp(BaseNegotiator):
         # to see if it is the last turn, and accept what ever offer
         if currentTurn is maxTurns:
             self.offer = offer
-            self.offer = BaseNegotiator.set_diff(self)
+            self.offer = BaseNegotiator.set_diff(offer)
             print "[SS}Last chance to make offer, will accept any offer" + str(self.offer)
             return self.offer
+
+            oppo_dict = self.oppoEstimation(offer)
+            print "oppo_dict: " + str(oppo_dict)
 
         if offer is not None:
             # Very important - we save the offer we're going to return as self.offer
