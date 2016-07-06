@@ -144,9 +144,9 @@ if __name__ == "__main__":
         (A_Utility,B_Utility,theRounds) = end_of_round_graph(negotiator_a,negotiator_b,roundinfo)
         #Make Post-Round Graph
         print("{} negotiation:\n\tNegotiator A: {}\n\tNegotiator B: {}".format("Successful" if result else "Failed", points_a, points_b))
-        g.make_post_round_graph(A_Utility,B_Utility,theRounds,results)
+        #g.make_post_round_graph(A_Utility,B_Utility,theRounds,results)
 
     print("Final result:\n\tNegotiator A: {}\n\tNegotiator B: {}".format(score_a, score_b))
     #Make Post-Game Graph
-    g.make_final_round_graph()
+    #g.make_final_round_graph()
 

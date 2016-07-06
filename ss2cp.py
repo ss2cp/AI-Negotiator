@@ -1,5 +1,6 @@
 from negotiator_base import BaseNegotiator
 from random import random
+from functools import wraps
 
 
 # Example negotiator implementation, which randomly chooses to accept
@@ -10,20 +11,37 @@ from random import random
 class ss2cp(BaseNegotiator):
     # Override the make_offer method from BaseNegotiator to accept a given offer 20%
     # of the time, and return a random subset the rest of the time.
+
+    def getTurns(self):
+        return self.iter_limit
+
+    def counter(func):
+        @wraps(func)
+        def tmp(*args, **kwargs):
+            tmp.count += 1
+            return func(*args, **kwargs)
+
+        tmp.count = 0
+        return tmp
+
+
+    @counter
     def make_offer(self, offer):
+        print self.make_offer.count
+        turns = ss2cp.getTurns(self)
         self.offer = offer
         if random() < 1 and offer is not None:
             # Very important - we save the offer we're going to return as self.offer
-            #print "ss2cp agree that you can take " + str(self.offer)
-            #self.offer = BaseNegotiator.set_diff(self)
-            print "ss2cp will take: " + str(self.offer) + ". My utility will be " + str(self.utility())
+            # print "ss2cp agree that you can take " + str(self.offer)
+            # self.offer = BaseNegotiator.set_diff(self)
+            print "[SS]ss2cp will take: " + str(self.offer) + ". My utility will be " + str(self.utility())
             return self.offer
         else:
             ordering = self.preferences
-            print ordering
             ourOffer = []
             for item in ordering.keys():
                 if random() < .5:
                     ourOffer = ourOffer + [item]
+            print "[SS]ss2cp made an offer: " + str(ourOffer)
             self.offer = ourOffer
             return self.offer
