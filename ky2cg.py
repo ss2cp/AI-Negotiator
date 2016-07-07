@@ -33,28 +33,28 @@ class ky2cg(BaseNegotiator):
         global maxTurns
         global oppo_dict
         # print the number of current turn
-        print self.make_offer.count
+        # print self.make_offer.count
         # get the current turn
         currentTurn = self.make_offer.count
 
         # update opponent's offer in our tracker
 
         oppo_dict = self.oppoEstimation(offer)
-        print "oppo_dict: " + str(oppo_dict)
+        # print "oppo_dict: " + str(oppo_dict)
 
         if currentTurn is 1:
             if offer is None:
                 # If going first, first turn decision = offer all positive util items
                 maxTurns = ky2cg.getTurns(self) + 1
-                print "[SS}ss2cp starts first, incrementing the max turn by 1, max turns is " + str(maxTurns)
+                # print "[SS}ss2cp starts first, incrementing the max turn by 1, max turns is " + str(maxTurns)
                 # then there will be an extra chance to accept an offer in the end
                 self.offer = self.positiveItems()
-                print "[SS]ss2cp will take: " + str(self.offer) + ". My utility will be " + str(self.utility())
+                # print "[SS]ss2cp will take: " + str(self.offer) + ". My utility will be " + str(self.utility())
                 return self.offer
 
             if offer is not None:
                 maxTurns = ky2cg.getTurns(self)
-                print "[SS}ss2cp starts second, max turns remains " + str(maxTurns)
+                # print "[SS}ss2cp starts second, max turns remains " + str(maxTurns)
                 # then there will be no extra chance to accept an offer in the end
 
         # to see if it is the last turn, and accept what ever offer
@@ -66,20 +66,20 @@ class ky2cg(BaseNegotiator):
                 self.offer = BaseNegotiator.set_diff(self)
 
                 if (self.utility() >= (self.totalUtility() / 3)):
-                    print "[SS]Last chance to accept offer, will accept any offer more than 1/3 of my total utility: " + str(
-                        self.offer) + " vs " + str(
-                        offer) + ". My utility will be " + str(self.utility()) + ". total/3 is " + str(
-                        self.totalUtility() / 3)
+                    # print "[SS]Last chance to accept offer, will accept any offer more than 1/3 of my total utility: " + str(
+                    #     self.offer) + " vs " + str(
+                    #     offer) + ". My utility will be " + str(self.utility()) + ". total/3 is " + str(
+                    #     self.totalUtility() / 3)
                     return self.offer
 
                 else:
                     self.offer = BaseNegotiator.set_diff(self)
-                    print "You bad!!! I'd rather get negative leward!!!!"
+                    # print "You bad!!! I'd rather get negative leward!!!!"
                     return self.offer
             else:
                 # then you are to give the final offer
-                print "[SS]Last chance to give offer, will take more than 2/3 of my total utility"
-                print "oppo_dict: " + str(oppo_dict)
+                # print "[SS]Last chance to give offer, will take more than 2/3 of my total utility"
+                # print "oppo_dict: " + str(oppo_dict)
                 total = 0
                 ourOffer = []
                 # look at the nonoffered items first
@@ -90,12 +90,12 @@ class ky2cg(BaseNegotiator):
                     if (item not in oppo_dict and ordering.get(item) >= 0):
                         ourOffer = ourOffer + [item]
                         total += ordering.get(item)
-                        print "Found an item that opponent never wanted, " + str(
-                            item) + ". It's value is positive, taking it. That give me total of " + str(total)
+                        # print "Found an item that opponent never wanted, " + str(
+                        #     item) + ". It's value is positive, taking it. That give me total of " + str(total)
                         if (total >= (2 / 3 * self.totalUtility())):
                             self.offer = ourOffer
-                            print "[SS]ss2cp will take: " + str(ourOffer) + ". My utility will be " + str(
-                                self.utility())
+                            # print "[SS]ss2cp will take: " + str(ourOffer) + ". My utility will be " + str(
+                            #     self.utility())
                             return self.offer
 
             while total < (2 / 3 * self.totalUtility()):
@@ -104,8 +104,8 @@ class ky2cg(BaseNegotiator):
                 total += oppo_dict.get(min)
                 del oppo_dict[min]
             self.offer = ourOffer
-            print "[SS]ss2cp will take: " + str(ourOffer) + ". My utility will be " + str(
-                self.utility())
+            # print "[SS]ss2cp will take: " + str(ourOffer) + ". My utility will be " + str(
+            #     self.utility())
             return self.offer
 
         if offer is not None:
@@ -113,14 +113,14 @@ class ky2cg(BaseNegotiator):
             self.offer = offer
             # If so, accept, negotiation is completed!
             if self.acceptableOffer() is True:
-                print("OFFER ACCEPTABLE!!! TAKING IT!!!!")
-                self.offer = BaseNegotiator.set_diff(self)
+                # print("OFFER ACCEPTABLE!!! TAKING IT!!!!")
+                # self.offer = BaseNegotiator.set_diff(self)
                 # self.offer = self.positiveRemainingItems()
                 return self.offer
 
             # Else, return more favorable offer to opponent
             else:  # Opponent offer currently takes more than half of total utilities
-                print("ARRANGING COUNTER OFFER!!!!!!!!!!")
+                # print("ARRANGING COUNTER OFFER!!!!!!!!!!")
                 currOffer = offer  # Save opponent offer to modify
                 self.offer = BaseNegotiator.set_diff(self)
                 ourOffer = self.positiveRemainingItems(
@@ -140,12 +140,12 @@ class ky2cg(BaseNegotiator):
                     else:
                         break
 
-                print("COUNTER OFFER: ")
-                for s in ourOffer:
-                    print(s)
+                # print("COUNTER OFFER: ")
+                # for s in ourOffer:
+                #     print(s)
 
                 self.offer = ourOffer
-                print "[SS]ss2cp will take: " + str(self.offer) + ". My utility will be " + str(self.utility())
+                # print "[SS]ss2cp will take: " + str(self.offer) + ". My utility will be " + str(self.utility())
                 return self.offer
 
     # the real method to update opponent's moves

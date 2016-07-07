@@ -4,7 +4,7 @@
 from csv import DictReader
 from sys import argv, exit
 
-from ky2cg3 import ky2cg
+from ky2cg import ky2cg
 from negotiator import Negotiator
 from ss2cp import ss2cp
 from random import randint
