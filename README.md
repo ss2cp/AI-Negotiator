@@ -104,6 +104,7 @@ When we tested our code against this *total-random negotiator* we realized this 
 ####List of items and their rewards:
 <img src="https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/items.png" width="400">
 
+####Round summary and final summary:
 <img src="https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/roundSummary.png" width="400">
 <img src="https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/finalSummary.png" width="400">
 
