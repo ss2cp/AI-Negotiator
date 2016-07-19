@@ -102,10 +102,10 @@ Decision process for final offer, including giving, accepting, and rejecting
 When we tested our code against this *total-random negotiator* we realized this will end up, in most cases, deterministic, meaning the utility received by both parties are the same over every iteration. See results below (total-random utility: 9, main algorithm: 9):
 
 ####List of items and their rewards:
-![items](https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/items.png)
+<img src="https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/items.png" width="400">
 
-![roundSummary](https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/roundSummary.png)
-![finalSummary](https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/finalSummary.png)
+<img src="https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/roundSummary.png" width="400">
+<img src="https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/finalSummary.png" width="400">
 
 ##Analysis
 One key insight we had was the possibility of opponent using an extremist algorithm that pushes very aggressively for a high utility value for them. We had to account for that by building in different thresholds at different stages of the negotiation in which we will accept an offer. Our original algorithm also did not account for opponent’s actions, other than the offer they present. By developing the functionality that keep track of what the opponent has offered in the past, we are able to better adjust our strategy in late-game scenarios.
