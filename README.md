@@ -111,7 +111,7 @@ When we tested our code against this *total-random negotiator* we realized this 
 ##Analysis
 One key insight we had was the possibility of opponent using an extremist algorithm that pushes very aggressively for a high utility value for them. We had to account for that by building in different thresholds at different stages of the negotiation in which we will accept an offer. Our original algorithm also did not account for opponent’s actions, other than the offer they present. By developing the functionality that keep track of what the opponent has offered in the past, we are able to better adjust our strategy in late-game scenarios.
 
-The testing results we saw throughout this homework demonstrated that this algorithm can become very deterministic, depending upon the opponent’s strategy. This is not alike what a human negotiator would do, where backtracking, price-raising, etc. can be used in response to what an opponent does.
+The testing results we saw throughout this project demonstrated that this algorithm can become very deterministic, depending upon the opponent’s strategy. This is not alike what a human negotiator would do, where backtracking, price-raising, etc. can be used in response to what an opponent does.
 
 Our implementation is not an overly aggressive one, in that it does not push the negotiation to the brink in order to maximize our gain. We believe this algorithm that aims for a fair distribution that can benefit both parties can maximize our opportunities in achieving a high overall utility after many rounds of negotiations, facing different negotiators.
 
