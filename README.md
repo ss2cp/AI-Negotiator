@@ -1,4 +1,4 @@
-# AI_4_Negotiator
+# AI-Negotiator
 A negotiating agent written in Python
 
 ##Background
