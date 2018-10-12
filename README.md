@@ -1,7 +1,7 @@
 # AI-Negotiator
 A negotiating agent written in Python
 
-##Background
+## Background
 Each negotiation will be over a set of items that have a utility value specific for each negotiator (not necessarily the same). The negotiation structure will consist of alternating offers with a finite turn limit.
 
 **Rules:** Each offer will be the set of items a negotiator wishes to take for itself. Both agents will receive a substantial negative reward if no agreement is made.
@@ -21,7 +21,7 @@ After a brief analysis of how to get maximum reward, or our baseline limit, we f
 
 3. **Keep track of opponent's favourite list.** Keep track of how many times each item the opponent has requested.
 
-##Pseudo Code for Decision Making
+## Pseudo Code for Decision Making
 ```Python
 # initialize a global variable to store the maxTurns
 maxTurns = 0
@@ -52,7 +52,7 @@ def make_offer(self, offer):
           	  add max worth item in opponent offer
 ```
 
-##Code Example
+## Code Example
 Decision process for final offer, including giving, accepting, and rejecting
 
 ```Python
@@ -101,14 +101,14 @@ Decision process for final offer, including giving, accepting, and rejecting
 
 When we tested our code against this *total-random negotiator* we realized this will end up, in most cases, deterministic, meaning the utility received by both parties are the same over every iteration. See results below (total-random utility: 9, main algorithm: 9):
 
-####List of items and their rewards:
+#### List of items and their rewards:
 <img src="https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/items.png" width="400">
 
-####Round summary and final summary:
+#### Round summary and final summary:
 <img src="https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/roundSummary.png" width="400">
 <img src="https://raw.githubusercontent.com/ss2cp/AI_HW4/master/Results/finalSummary.png" width="400">
 
-##Analysis
+## Analysis
 One key insight we had was the possibility of opponent using an extremist algorithm that pushes very aggressively for a high utility value for them. We had to account for that by building in different thresholds at different stages of the negotiation in which we will accept an offer. Our original algorithm also did not account for opponent’s actions, other than the offer they present. By developing the functionality that keep track of what the opponent has offered in the past, we are able to better adjust our strategy in late-game scenarios.
 
 The testing results we saw throughout this project demonstrated that this algorithm can become very deterministic, depending upon the opponent’s strategy. This is not alike what a human negotiator would do, where backtracking, price-raising, etc. can be used in response to what an opponent does.
